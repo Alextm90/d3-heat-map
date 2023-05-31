@@ -2,7 +2,7 @@ const padding = 100
 const width = 1400
 const height = 900
 const tickMonths = ['','January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'] 
-const colorArray = ["red", "blue", "orange", "grey", "pink", "green", "black", "purple", "yellow", "aqua", "white" ] 
+const colorArray = ["red", "blue", "orange", "grey", "pink", "green", "black", "purple", "yellow", "aqua", "gold" ] 
 const tempArray = [1.6, 2.7, 3.8, 4.9, 6, 7.2, 8.3, 9.4, 10.5, 11.6, 12.7, 13.9]
 
 // create svg + title
@@ -58,32 +58,34 @@ svg.append('g')
 // create legend
 const legendScale = d3.scaleBand()
         .domain(tempArray) 
-        .range([0, 350])
+        .range([0, 300])
 
 const legendAxis = d3.axisBottom()
         .scale(legendScale)
-        .ticks(9)
         
 const legend = svg.append('g')
         .attr('id', 'legend')
         .call(legendAxis) 
         .attr('transform', 'translate(' + 300 + ', ' + 675 + ')')
 
- legend.selectAll('rect')
+ legend.selectAll('.rect')
         .data(tempArray)
-        .enter()
-        .append('rect')
+        .join('rect')
         .attr('class', 'rect')
         .attr('y', padding)
         .attr('x', (d, i) => {
             console.log(d)
-            return legendScale(d) 
+            return legendScale(d)
         })
-        .attr('fill', 'red')
-        .attr('width', 40) 
-        .attr('height', 200)
-        .attr('border', '1px solid black')
-        
+        .attr('fill', (d, i) => {
+                    return colorArray[i] 
+        })
+        .attr('width', 24.36) 
+        .attr('height', 30)
+        .style("outline", (d, i) => {
+            if (i != 11) return "1px solid black"
+        })  
+       .attr("transform", 'translate(13,  ' + - 130 + ')')
 
 // add data points
 svg.selectAll('.cell')
@@ -109,6 +111,7 @@ svg.selectAll('.cell')
         .attr("data-month", (d) => d.month - 1)
         .attr("data-year", (d) => d.year)
         .attr("data-temp", (d) => d.variance)
+
      })
 }
 map()
