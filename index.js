@@ -22,7 +22,7 @@ svg.append('text')
         .attr('transform', 'translate(-100, -50)')
 
 svg.append('text')
-        .text(`1753 - 2015: Base Temperature 8.66℃`)
+        .text(`1753 - 2015: Average Temperature 8.66℃`)
         .attr('id', 'description')
         .attr('x', 510)
         .attr('y', 80)
