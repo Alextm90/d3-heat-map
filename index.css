@@ -1,0 +1,17 @@
+body {
+    height: 600px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: auto;
+    background-color: #75c6e3;
+}
+
+#tooltip {
+    padding: 7px;
+    border-radius: 4px;
+}
+
+.cell:hover {
+   stroke: black;
+}
